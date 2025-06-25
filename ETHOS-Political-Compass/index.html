@@ -522,12 +522,11 @@ window.addEventListener('DOMContentLoaded', () => {
     <form id="shareForm">
       <label>Age: <input type="number" name="age" required></label><br><br>
 
-      <label>Gender:
+      <label>Sex:
         <select name="gender" required>
           <option value="">Select</option>
           <option>Male</option>
           <option>Female</option>
-          <option>Other</option>
           <option>Prefer not to say</option>
         </select>
       </label><br><br>
@@ -572,12 +571,15 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
       
     </form>
+    <div id="shareSuccess" style="display:none; text-align:center; padding: 10px; margin-top: 15px; background-color:#e0ffe0; border: 1px solid #4CAF50; border-radius: 6px; color: #2e7d32;">
+      Thank you! Your results have been submitted.
+    </div>
   </div>
 </div>
 
 <script src="script.js"></script>
 <script> 
-const BACKEND_URL = 'https://your-render-subdomain.onrender.com/submit'; // ← replace with your real Render URL
+const BACKEND_URL = 'https://ethos-api-4jst.onrender.com'; 
 
 let finalX = 0;
 let finalY = 0;
@@ -598,6 +600,7 @@ function closeShareForm() {
 
 function submitResults() {
   const form = document.getElementById('shareForm');
+  const successBox = document.getElementById('shareSuccess');
 
   const data = {
     age: form.age.value,
@@ -620,13 +623,28 @@ function submitResults() {
   })
   .then(response => {
     if (response.ok) {
-      alert("✅ Thanks for sharing your results!");
-      closeShareForm();
+      // Show success message
+      successBox.style.display = 'block';
+
+      // Disable all inputs in the form
+      Array.from(form.elements).forEach(el => el.disabled = true);
+
+      // Optionally auto-close the modal after 3 seconds
+      setTimeout(() => {
+        successBox.style.display = 'none';
+        closeShareForm();
+
+        // Optional: re-enable form if needed next time
+        Array.from(form.elements).forEach(el => el.disabled = false);
+        form.reset();
+      }, 3000);
     } else {
+      successBox.style.display = 'none';
       alert("❌ Submission failed. Please try again.");
     }
   })
   .catch(err => {
+    successBox.style.display = 'none';
     alert("❌ Network error. Try again later.");
     console.error(err);
   });

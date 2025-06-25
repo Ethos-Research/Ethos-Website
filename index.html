@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethos | Clarity in Politics</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f8f5ee;
+      color: #111111;
+      font-family: 'Inter', sans-serif;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Merriweather', serif;
+      color: #111111;
+    }
+
+    a {
+      color: #111;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #444;
+    }
+
+    .btn-neutral {
+      background-color: #111111;
+      color: #f5f0e6;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-neutral:hover {
+      background-color: #2a2a2a;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+ 
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f5f0e6;
+      padding: 20px 40px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      color: #111;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+
+    nav a,
+    nav button {
+      background: none;
+      border: none;
+      text-decoration: none;
+      color: #111;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #f8f5ee;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      min-width: 200px;
+      z-index: 1000;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 16px;
+      color: #111;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ece7dd;
+    }
+
+    /* Hover support */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Click support */
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+
+    .hero-section {
+      position: relative;
+      background-color: #f8f5ee;
+      padding: 120px 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 44%; /* push the image down */
+      left: 94.5%;
+      transform: translate(-50%, -50%);
+      background-image: url('SRC/Raven.png'); /* your logo */
+      background-repeat: no-repeat;
+      background-size: 10%; /* scale logo */
+      opacity: 0.05; /* watermark effect */
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-content h2 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 20px;
+      font-family: Georgia, serif;
+    }
+    
+    .hero-content p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #222;
+    }
+  </style>
+<body class="flex flex-col min-h-screen">
+
+  <header>
+    <div class="logo">Ethos</div>
+    <nav>
+      <div class="dropdown" id="projectsDropdown">
+        <button onclick="toggleDropdown()">Projects ▾</button>
+        <div class="dropdown-content">
+          <a href="ETHOS-Political-Compass/index.html">Political Compass</a>
+        </div>
+      </div>
+
+      <a href="Donation-Page/Index.html">Donate</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>A New Standard for Political Understanding</h2>
+      <p>
+        Ethos is building a more honest, accessible political landscape—where truth rises above noise and understanding is for everyone.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="px-8 py-24 border-t border-gray-300 bg-[#f3ede4]">
+    <div class="max-w-4xl mx-auto fade-in">
+      <h3 class="text-4xl font-bold mb-6">Our Mission</h3>
+      <p class="text-lg leading-relaxed">
+        In today’s fractured political environment, truth often takes a backseat to outrage. 
+        At Ethos, we believe in transparency, evidence, and human-centered communication. 
+        We cut through media distortion and performative politics to bring people clear, fair, and factual insights into political decisions and narratives.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto px-8 py-6 text-sm text-gray-700 border-t text-center">
+    &copy; 2025 Ethos. Designed with purpose.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Fade in body on load
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Scroll-triggered fade-ins
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    fadeIns.forEach(el => observer.observe(el));
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('projectsDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('projectsDropdown');
+      const button = dropdown.querySelector('button');
+      const content = dropdown.querySelector('.dropdown-content');
+
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>

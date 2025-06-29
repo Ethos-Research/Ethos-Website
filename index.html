@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Edge Lines</title>
+<title>Doors with Animated Lines</title>
 <style>
   html, body {
     margin: 0;
@@ -15,7 +15,7 @@
   .splash {
     position: fixed;
     inset: 0;
-    background: yellow; /* or your background */
+    background: yellow; /* background behind doors */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,19 +27,33 @@
     top: 0;
     width: 50%;
     height: 100%;
-    background: blue; /* or your desired color */
+    background: blue;
     transition: transform 2s ease;
     z-index: 2;
   }
 
-  .door.left {
-    left: 0;
-    border-right: 2px solid white; /* white edge line */
+  /* pseudo-element for animated line */
+  .door::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  .door.right {
+  .door.left::before {
     right: 0;
-    border-left: 2px solid white; /* white edge line */
+  }
+  .door.right::before {
+    left: 0;
+  }
+
+  /* show line when opening */
+  .splash.open .door::before {
+    opacity: 1;
   }
 
   .splash.open .left { transform: translateX(-100%); }

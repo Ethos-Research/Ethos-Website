@@ -29,8 +29,8 @@
     top: 0;
     width: 50%;
     height: 100%;
-    background: #444; /* Same as splash background */
-    transition: transform 1s ease;
+    background: #444;
+    transition: transform 1.5s ease; /* Slower transition so you can see it */
     z-index: 2;
   }
 
@@ -47,14 +47,18 @@
   }
 
   .logo {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: auto;
+  }
+
+  .logo img {
     width: 100px;
     height: auto;
     display: block;
-    margin: 0 auto;
-    position: relative;
   }
 
-  /* Shimmer effect */
   .logo::after {
     content: "";
     position: absolute;
@@ -86,21 +90,22 @@
     <div class="door left"></div>
     <div class="door right"></div>
     <div class="logo-container">
-      <img src="SRC/Raven.png" alt="ETHOS Logo" class="logo" />
+      <div class="logo">
+        <img src="SRC/Raven.png" alt="ETHOS Logo" />
+      </div>
       <h1>ETHOS</h1>
     </div>
   </div>
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    // Wait for shimmer
+    // Wait for shimmer animation (2s)
     setTimeout(() => {
       document.getElementById('splash').classList.add('open');
-      // Wait for doors to finish opening
+      // Wait for doors to finish opening (1.5s)
       setTimeout(() => {
-        // Redirect to the real home page
         window.location.href = "/Home";
-      }, 1000);
+      }, 1500);
     }, 2000);
   });
 </script>

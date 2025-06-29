@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Animated Edge Lines</title>
+<title>Doors with Edge Lines</title>
 <style>
   html, body {
     margin: 0;
@@ -15,7 +15,7 @@
   .splash {
     position: fixed;
     inset: 0;
-    background: yellow;
+    background: yellow; /* Background behind doors */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,29 +32,30 @@
     z-index: 2;
   }
 
+  .door.left { left: 0; }
+  .door.right { right: 0; }
+
   .door .edge-line {
     position: absolute;
     top: 0;
     width: 2px;
     height: 100%;
     background: white;
-    opacity: 0;
-    transition: opacity 0.3s ease;
   }
 
   .door.left .edge-line {
-    right: 0;
+    right: 0; /* Line on right edge of left door */
   }
   .door.right .edge-line {
-    left: 0;
+    left: 0; /* Line on left edge of right door */
   }
 
-  .splash.open .door .edge-line {
-    opacity: 1;
+  .splash.open .door.left {
+    transform: translateX(-100%);
   }
-
-  .splash.open .left { transform: translateX(-100%); }
-  .splash.open .right { transform: translateX(100%); }
+  .splash.open .door.right {
+    transform: translateX(100%);
+  }
 
   .logo-container {
     position: relative;
@@ -102,4 +103,3 @@
 </script>
 </body>
 </html>
-

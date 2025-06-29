@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Edge Lines</title>
+<title>Doors with Delayed Lines</title>
 <style>
   html, body {
     margin: 0;
@@ -32,29 +32,32 @@
     z-index: 2;
   }
 
-  .door.left { left: 0; }
-  .door.right { right: 0; }
-
   .door .edge-line {
     position: absolute;
     top: 0;
     width: 2px;
     height: 100%;
     background: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  .door.left .edge-line {
-    right: 0; /* Line on right edge of left door */
-  }
-  .door.right .edge-line {
-    left: 0; /* Line on left edge of right door */
+  .door.left .edge-line { right: 0; }
+  .door.right .edge-line { left: 0; }
+
+  /* Fade lines in */
+  .splash.open .door .edge-line {
+    opacity: 1;
   }
 
+  /* Delay doors moving */
   .splash.open .door.left {
     transform: translateX(-100%);
+    transition-delay: 0.3s;
   }
   .splash.open .door.right {
     transform: translateX(100%);
+    transition-delay: 0.3s;
   }
 
   .logo-container {

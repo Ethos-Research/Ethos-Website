@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Loading ETHOS...</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      background: #2196f3; /* brand color background */
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ETHOS Loading</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #2196f3; /* fallback background */
+  }
 
-    .loader-container {
-      text-align: center;
-      opacity: 1;
-      transition: opacity 1s ease;
-    }
+  .door-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 
-    .loader {
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top: 4px solid #fff;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-    }
+  .door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #2196f3; /* same brand color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s ease;
+    z-index: 2;
+  }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+  .door.left {
+    left: 0;
+  }
 
-    .fade-out {
-      opacity: 0;
-    }
-  </style>
+  .door.right {
+    right: 0;
+  }
+
+  .door h1 {
+    color: white;
+    font-size: 2rem;
+  }
+
+  .door-container.open .left {
+    transform: translateX(-100%);
+  }
+
+  .door-container.open .right {
+    transform: translateX(100%);
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    z-index: 1;
+  }
+
+  @keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+</style>
 </head>
 <body>
-  <div class="loader-container" id="loader">
-    <div class="loader"></div>
-    <h1>ETHOS</h1>
-    <p>Loading your experience...</p>
+  <div class="door-container" id="doors">
+    <div class="door left"><h1>ETHOS</h1></div>
+    <div class="door right"><h1>ETHOS</h1></div>
+    <div class="spinner"></div>
   </div>
 
-  <script>
-    // Wait 2 seconds, then fade out
+<script>
+  // Wait 2 seconds, then animate doors
+  setTimeout(() => {
+    document.getElementById('doors').classList.add('open');
+    // Wait for the doors to finish opening
     setTimeout(() => {
-      const loader = document.getElementById('loader');
-      loader.classList.add('fade-out');
-      // After fade transition, redirect
-      setTimeout(() => {
-        window.location.href = "/Home";
-      }, 1000); // match fade duration
-    }, 2000);
-  </script>
+      window.location.href = "/home/index.html";
+    }, 1000);
+  }, 2000);
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Animated Lines</title>
+<title>Doors with Animated Edge Lines</title>
 <style>
   html, body {
     margin: 0;
@@ -15,7 +15,7 @@
   .splash {
     position: fixed;
     inset: 0;
-    background: yellow; /* background behind doors */
+    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,9 +32,7 @@
     z-index: 2;
   }
 
-  /* pseudo-element for animated line */
-  .door::before {
-    content: "";
+  .door .edge-line {
     position: absolute;
     top: 0;
     width: 2px;
@@ -44,15 +42,14 @@
     transition: opacity 0.3s ease;
   }
 
-  .door.left::before {
+  .door.left .edge-line {
     right: 0;
   }
-  .door.right::before {
+  .door.right .edge-line {
     left: 0;
   }
 
-  /* show line when opening */
-  .splash.open .door::before {
+  .splash.open .door .edge-line {
     opacity: 1;
   }
 
@@ -80,8 +77,12 @@
 </head>
 <body>
   <div class="splash" id="splash">
-    <div class="door left"></div>
-    <div class="door right"></div>
+    <div class="door left">
+      <div class="edge-line"></div>
+    </div>
+    <div class="door right">
+      <div class="edge-line"></div>
+    </div>
     <div class="logo-container">
       <div class="logo">
         <img src="SRC/Raven.png" alt="ETHOS Logo" />
@@ -101,3 +102,4 @@
 </script>
 </body>
 </html>
+

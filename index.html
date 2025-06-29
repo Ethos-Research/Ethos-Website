@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Test Doors Only</title>
+<title>Test Doors Only No Redirect</title>
 <style>
   html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: yellow; /* VERY obvious background */
+    background: yellow;
     overflow: hidden;
   }
 
   .splash {
     position: fixed;
     inset: 0;
-    background: blue; /* Blue doors */
+    background: blue;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,13 +59,9 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    // Wait 2s
     setTimeout(() => {
       document.getElementById('splash').classList.add('open');
-      // Wait 2s for the doors to finish moving
-      setTimeout(() => {
-        window.location.href = "/Home";
-      }, 2000);
+      // No redirect here—just wait indefinitely so you can see the doors
     }, 2000);
   });
 </script>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Delayed Lines</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doors With Clean Staging</title>
 <style>
   html, body {
     margin: 0;
@@ -15,7 +15,7 @@
   .splash {
     position: fixed;
     inset: 0;
-    background: yellow; /* Background behind doors */
+    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +32,9 @@
     z-index: 2;
   }
 
+  .door.left { left: 0; }
+  .door.right { right: 0; }
+
   .door .edge-line {
     position: absolute;
     top: 0;
@@ -45,19 +48,17 @@
   .door.left .edge-line { right: 0; }
   .door.right .edge-line { left: 0; }
 
-  /* Fade lines in */
-  .splash.open .door .edge-line {
+  /* Stage 1: fade in lines */
+  .splash.ready .door .edge-line {
     opacity: 1;
   }
 
-  /* Delay doors moving */
+  /* Stage 2: move doors */
   .splash.open .door.left {
     transform: translateX(-100%);
-    transition-delay: 0.3s;
   }
   .splash.open .door.right {
     transform: translateX(100%);
-    transition-delay: 0.3s;
   }
 
   .logo-container {
@@ -97,12 +98,16 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded fired.");
+    // 2s pause
     setTimeout(() => {
-      console.log("Adding .open class");
-      document.getElementById('splash').classList.add('open');
+      document.getElementById('splash').classList.add('ready');
+      // 0.4s later, start doors moving
+      setTimeout(() => {
+        document.getElementById('splash').classList.add('open');
+      }, 400);
     }, 2000);
   });
 </script>
 </body>
 </html>
+

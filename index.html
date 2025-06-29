@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Test Basic Class Toggle</title>
+<title>Test Door Slide Only</title>
 <style>
   html, body {
     margin: 0;
@@ -15,23 +15,45 @@
   .splash {
     position: fixed;
     inset: 0;
-    background: blue;
+    background: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
-    color: white;
-    font-size: 24px;
   }
 
-  .splash.open {
-    background: red;
+  .door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: blue;
+    transition: transform 2s ease;
+    z-index: 2;
+  }
+
+  .door.left { left: 0; }
+  .door.right { right: 0; }
+
+  .splash.open .left { transform: translateX(-100%); }
+  .splash.open .right { transform: translateX(100%); }
+
+  .logo-container {
+    position: relative;
+    z-index: 3;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
   }
 </style>
 </head>
 <body>
   <div class="splash" id="splash">
-    ETHOS
+    <div class="door left"></div>
+    <div class="door right"></div>
+    <div class="logo-container">
+      ETHOS
+    </div>
   </div>
 
 <script>

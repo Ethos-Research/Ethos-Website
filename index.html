@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Doors with Logo</title>
+<title>Doors with Logo Div</title>
 <style>
   html, body {
     margin: 0;
@@ -44,11 +44,15 @@
     text-align: center;
   }
 
-  .logo-container img {
+  .logo {
+    position: relative;
+    display: inline-block;
+  }
+
+  .logo img {
     width: 100px;
     height: auto;
     display: block;
-    margin: 0 auto;
   }
 
   .logo-container h1 {
@@ -62,7 +66,9 @@
     <div class="door left"></div>
     <div class="door right"></div>
     <div class="logo-container">
-      <img src="SRC/Raven.png" alt="ETHOS Logo" />
+      <div class="logo">
+        <img src="SRC/Raven.png" alt="ETHOS Logo" />
+      </div>
       <h1>ETHOS</h1>
     </div>
   </div>

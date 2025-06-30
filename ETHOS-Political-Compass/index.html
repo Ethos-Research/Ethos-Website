@@ -603,7 +603,7 @@ function submitResults() {
   const successBox = document.getElementById('shareSuccess');
   const submitButton = form.querySelector('button[type="button"]');
 
-  // Disable the submit button immediately to prevent double-clicks
+  // Disable the submit button immediately
   submitButton.disabled = true;
 
   const data = {
@@ -620,6 +620,12 @@ function submitResults() {
     label: finalLabel
   };
 
+  // Show success message immediately
+  successBox.style.display = 'block';
+
+  // Close the modal right away
+  closeShareForm();
+
   fetch(BACKEND_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -627,33 +633,22 @@ function submitResults() {
   })
   .then(response => {
     if (response.ok) {
-      // Show success message
-      successBox.style.display = 'block';
-
-      // Disable all inputs in the form
-      Array.from(form.elements).forEach(el => el.disabled = true);
-
-      // Auto-close modal after 3 seconds
-      setTimeout(() => {
-        successBox.style.display = 'none';
-        closeShareForm();
-
-        // Re-enable form if needed for next submission
-        Array.from(form.elements).forEach(el => el.disabled = false);
-        submitButton.disabled = false;
-        form.reset();
-      }, 3000);
+      console.log("✅ Submission succeeded.");
+      // You could optionally log or trigger analytics here.
     } else {
-      successBox.style.display = 'none';
-      alert("❌ Submission failed. Please try again.");
-      submitButton.disabled = false;
+      alert("❌ Submission failed on the server. You do not need to resubmit.");
     }
   })
   .catch(err => {
-    successBox.style.display = 'none';
-    alert("❌ Network error. Try again later.");
     console.error(err);
+    alert("❌ Network error. Submission may not have been recorded.");
+  })
+  .finally(() => {
+    // Re-enable form for potential future submission
+    Array.from(form.elements).forEach(el => el.disabled = false);
     submitButton.disabled = false;
+    form.reset();
+    successBox.style.display = 'none'; // Hide the thank you message after a delay if you want
   });
 }
 

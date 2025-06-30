@@ -382,6 +382,8 @@ body.dark-mode .result-description {
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
+window.pageLoadTime = Date.now();
+  
 function toggleDonations() {
   const aside = document.querySelector('.donation-sidebar');
   const button = document.getElementById('donationToggleBtn');
@@ -565,6 +567,11 @@ window.addEventListener('DOMContentLoaded', () => {
         </select>
       </label><br><br>
 
+        <!--Honeypot field to trap bots -->
+      <div style="position:absolute; left:-9999px; visibility:hidden;">
+        <label>Leave this field empty: <input type="text" name="nickname"></label>
+      </div>
+      
     <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
       <button type="button" onclick="submitResults()" class="share-button">Submit</button>
       <button type="button" onclick="closeShareForm()" class="share-button cancel">Cancel</button>
@@ -603,6 +610,25 @@ function submitResults() {
   const successBox = document.getElementById('shareSuccess');
   const submitButton = form.querySelector('button[type="button"]');
 
+  // Anti-spam: Honeypot field
+  if (form.nickname && form.nickname.value) {
+    alert("❌ Submission blocked.");
+    return;
+  }
+
+  // Anti-spam: Minimum time on page
+  const elapsed = (Date.now() - window.pageLoadTime) / 1000;
+  if (elapsed < 10) {
+    alert("❌ Please spend a few seconds reviewing your results before submitting.");
+    return;
+  }
+
+  // Anti-spam: Already submitted
+  if (localStorage.getItem("hasSubmittedEthos") === "true") {
+    alert("✅ You have already submitted your results. Thank you!");
+    return;
+  }
+
   // Disable the submit button immediately
   submitButton.disabled = true;
 
@@ -634,7 +660,8 @@ function submitResults() {
   .then(response => {
     if (response.ok) {
       console.log("✅ Submission succeeded.");
-      // You could optionally log or trigger analytics here.
+      // Mark this user as submitted
+      localStorage.setItem("hasSubmittedEthos", "true");
     } else {
       alert("❌ Submission failed on the server. You do not need to resubmit.");
     }
@@ -648,7 +675,7 @@ function submitResults() {
     Array.from(form.elements).forEach(el => el.disabled = false);
     submitButton.disabled = false;
     form.reset();
-    successBox.style.display = 'none'; // Hide the thank you message after a delay if you want
+    successBox.style.display = 'none'; // Hide thank you message after a delay if you prefer
   });
 }
 

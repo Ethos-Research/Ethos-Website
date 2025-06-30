@@ -1,1 +1,102 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact ETHOS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f8f5ee;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .contact-container {
+      background: white;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .contact-container h1 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: white;
+      transition: background 0.3s ease;
+    }
+
+    .contact-link.twitter {
+      background: #1DA1F2;
+    }
+    .contact-link.twitter:hover {
+      background: #0d8ddb;
+    }
+
+    .contact-link.discord {
+      background: #5865F2;
+    }
+    .contact-link.discord:hover {
+      background: #404ee0;
+    }
+
+    .contact-link.reddit {
+      background: #FF4500;
+    }
+    .contact-link.reddit:hover {
+      background: #e03d00;
+    }
+
+    .contact-link img {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <h1>Contact ETHOS</h1>
+    <p>Connect with us on your favorite platform:</p>
+    <div class="contact-links">
+      <a href="https://twitter.com/YOUR_HANDLE" target="_blank" class="contact-link twitter">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter">
+        Twitter
+      </a>
+      <a href="https://discord.gg/YOUR_INVITE" target="_blank" class="contact-link discord">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+        Discord
+      </a>
+      <a href="https://reddit.com/r/YOUR_SUBREDDIT" target="_blank" class="contact-link reddit">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/reddit.svg" alt="Reddit">
+        Reddit
+      </a>
+    </div>
+  </div>
+</body>
+</html>

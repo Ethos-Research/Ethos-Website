@@ -601,6 +601,10 @@ function closeShareForm() {
 function submitResults() {
   const form = document.getElementById('shareForm');
   const successBox = document.getElementById('shareSuccess');
+  const submitButton = form.querySelector('button[type="button"]');
+
+  // Disable the submit button immediately to prevent double-clicks
+  submitButton.disabled = true;
 
   const data = {
     age: form.age.value,
@@ -629,26 +633,37 @@ function submitResults() {
       // Disable all inputs in the form
       Array.from(form.elements).forEach(el => el.disabled = true);
 
-      // Optionally auto-close the modal after 3 seconds
+      // Auto-close modal after 3 seconds
       setTimeout(() => {
         successBox.style.display = 'none';
         closeShareForm();
 
-        // Optional: re-enable form if needed next time
+        // Re-enable form if needed for next submission
         Array.from(form.elements).forEach(el => el.disabled = false);
+        submitButton.disabled = false;
         form.reset();
       }, 3000);
     } else {
       successBox.style.display = 'none';
       alert("❌ Submission failed. Please try again.");
+      submitButton.disabled = false;
     }
   })
   .catch(err => {
     successBox.style.display = 'none';
     alert("❌ Network error. Try again later.");
     console.error(err);
+    submitButton.disabled = false;
   });
 }
+
+window.addEventListener("beforeunload", function (e) {
+  if (document.getElementById("shareModal").style.display === "block") {
+    e.preventDefault();
+    e.returnValue = "Are you sure you want to leave? Your submission is not completed.";
+    return "Are you sure you want to leave? Your submission is not completed.";
+  }
+});
 
 function showTab(id) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));

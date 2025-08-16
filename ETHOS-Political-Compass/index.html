@@ -379,6 +379,53 @@ body.dark-mode .result-description {
 .share-button.cancel {
   background-color: #777;
 }
+
+@media (max-width: 768px){
+  .container, main, header, footer, section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .wrap, .container, .page {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  img, video, canvas, iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  table { width: 100%; display: block; overflow-x: auto; }
+
+  p, h1, h2, h3, h4, h5, h6, li {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .row, .grid, .columns {
+    display: block !important;   
+  }
+  .col, .column, .left, .right, [class*="col-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+  }
+
+  .card, .panel, .box, article, section {
+    margin-bottom: 16px;
+  }
+
+  h1 { font-size: clamp(26px, 6vw, 34px); line-height: 1.2; }
+  h2 { font-size: clamp(20px, 5vw, 28px); line-height: 1.25; }
+  body { font-size: clamp(14px, 4vw, 16px); line-height: 1.55; }
+
+  body.has-sticky-header main { padding-top: var(--header-height, 60px); }
+}
+
+* { box-sizing: border-box; }
+img, video { display: block; }
 </style>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
